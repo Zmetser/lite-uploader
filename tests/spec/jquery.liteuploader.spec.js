@@ -291,6 +291,16 @@ describe('Lite Uploader', function () {
 
             expect(result.get()).toEqual([{ 'liteUploader_id' : 'foobar' }, {'tester': 'tester1'}, {'tester': 'tester2'}]);
         });
+
+        it('should add files to form data with custom param name', function () {
+            var liteUploader = new LiteUploader(fileInput, {params:{}, paramName: 'paramName'}),
+                result;
+            spyOn(liteUploader, '_getFormDataObject').and.returnValue(formDataObject);
+
+            result = liteUploader._collateFormData(['tester1', 'tester2']);
+
+            expect(result.get()).toEqual([{ 'liteUploader_id' : 'foobar' }, {'paramName': 'tester1'}, {'paramName': 'tester2'}]);
+        });
     });
 
     describe('building xhr object', function () {

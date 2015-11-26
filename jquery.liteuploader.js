@@ -7,6 +7,9 @@ $.fn.liteUploader = function (options) {
             allowedFileTypes: null,
             maxSize: null
         },
+        // The parameter name for the file form data (request argument name).
+        // If empty, the name property of the file input field is used.
+        paramName: null,
         params: {},
         headers: {},
         changeHandler: true,
@@ -160,6 +163,8 @@ LiteUploader.prototype = {
 
     _collateFormData: function (files) {
         var formData = this._getFormDataObject();
+        var paramName = this.options.paramName || this.el.attr('name');
+
         if (this.el.attr('id')) formData.append('liteUploader_id', this.el.attr('id'));
 
         $.each(this.params, function (key, value) {
@@ -167,8 +172,8 @@ LiteUploader.prototype = {
         });
 
         $.each(files, function (i) {
-            formData.append(this.el.attr('name'), files[i]);
-        }.bind(this));
+            formData.append(paramName, files[i]);
+        });
 
         return formData;
     },

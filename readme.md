@@ -35,6 +35,12 @@ The aim was to see, at its absolute minimum, how little code do you need to make
         </td>
     </tr>
     <tr>
+        <td>paramName</td>
+        <td>String</td>
+        <td>null</td>
+        <td>The parameter name for the file form data (request argument name). If empty, the name property of the file input field is used.</td>
+    </tr>
+    <tr>
         <td>params</td>
         <td>Object</td>
         <td>{}</td>
