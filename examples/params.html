@@ -25,6 +25,7 @@
 		$(document).ready(function () {
 			$('.fileUpload').liteUploader({
 				script: 'params.php',
+				paramName: 'foobar',
 				params: {
 					foo: 'bar',
 					abc: 123
@@ -35,8 +36,12 @@
 			.on('lu:success', function (e, response) {
 				$('#display').html('Params: ');
 
-				$.each(JSON.parse(response), function (key, value) {
+				var response = JSON.parse(response);
+				$.each(response.post, function parse(key, value) {
 					$('#display').append(key + ':' + value + ' ');
+				});
+				$.each(response.file, function parse(key, value) {
+					$('#display').append('<br>File param name:' + key + ' ');
 				});
 			})
 			.on('lu:progress', function (e, percentage) {
